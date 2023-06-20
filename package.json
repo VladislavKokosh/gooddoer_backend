@@ -1,0 +1,51 @@
+{
+  "name": "gooddoer_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VladislavKokosh/gooddoer_backend.git"
+  },
+  "keywords": [
+    "Nodejs",
+    "typescript",
+    "express"
+  ],
+  "author": "Vladislav Kokosh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VladislavKokosh/gooddoer_backend/issues"
+  },
+  "homepage": "https://github.com/VladislavKokosh/gooddoer_backend#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.3.1",
+    "@typescript-eslint/eslint-plugin": "^5.50.0",
+    "concurrently": "^8.2.0",
+    "eslint": "^8.0.1",
+    "eslint-config-standard-with-typescript": "^35.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "husky": "^8.0.3",
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.8",
+    "pretty-quick": "^3.1.3",
+    "typescript": "*"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  }
+}
