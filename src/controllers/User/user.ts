@@ -15,7 +15,7 @@ export const getUserById = async (req: Request, res: Response): Promise<void> =>
     res.status(400).json({ message: 'Request should have id in params' });
   }
 
-  const user = await User.findOne({ id });
+  const user = await User.findOne({ _id: id });
 
   if (user) {
     res.status(200).json({ user });
@@ -32,6 +32,7 @@ export const getNonceByAddress = async (req: Request, res: Response): Promise<vo
   }
 
   const user = await User.findOne({ publicAddress });
+  console.log(user);
   if (user) {
     res.status(200).json({ nonce: user.nonce });
   } else {
@@ -119,8 +120,7 @@ export const changeUsername = async (req: Request, res: Response): Promise<void>
       res.status(400).json({ message: 'Request should have username and username' });
     }
 
-    const user = await User.findOne({ id });
-
+    const user = await User.findOne({ _id: id });
     if (!user) {
       res.status(500).json({ error: 'User is not found.' });
       return;
@@ -128,6 +128,7 @@ export const changeUsername = async (req: Request, res: Response): Promise<void>
 
     user.username = username;
     await user.save();
+    res.status(200).json({ username });
   } catch (err: any) {
     console.log(err);
     res.status(400).json({ message: `Error ${err}` });

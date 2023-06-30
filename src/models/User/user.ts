@@ -4,12 +4,6 @@ import { type IUser } from './user.types';
 import { isValidEthAddress } from '../../utils';
 
 const userSchema = new Schema<IUser>({
-  id: {
-    type: String,
-    required: [true, 'A id is required'],
-    unique: true,
-    default: () => uuidv4(),
-  },
   nonce: {
     type: String,
     required: [true, 'A nonce is required'],
