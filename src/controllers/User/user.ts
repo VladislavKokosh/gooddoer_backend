@@ -8,6 +8,37 @@ import { createToken } from '../../passport/service';
 
 import { User } from '../../models/User/user';
 
+export const getUserById = async (req: Request, res: Response): Promise<void> => {
+  const { id } = req.params;
+
+  if (!id) {
+    res.status(400).json({ message: 'Request should have id in params' });
+  }
+
+  const user = await User.findOne({ id });
+
+  if (user) {
+    res.status(200).json({ user });
+  } else {
+    res.status(404).json({ message: 'User is not found' });
+  }
+};
+
+export const getNonceByAddress = async (req: Request, res: Response): Promise<void> => {
+  const { publicAddress } = req.params;
+
+  if (!publicAddress) {
+    res.status(400).json({ message: 'Request should have publicAddress in params' });
+  }
+
+  const user = await User.findOne({ publicAddress });
+  if (user) {
+    res.status(200).json({ nonce: user.nonce });
+  } else {
+    res.status(404).json({ message: 'User is not found' });
+  }
+};
+
 export const newUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const { publicAddress } = req.body;
@@ -39,21 +70,6 @@ export const newUser = async (req: Request, res: Response): Promise<void> => {
   } catch (err: any) {
     console.log(err);
     res.status(400).json({ message: `Error ${err}` });
-  }
-};
-
-export const getNonceByAddress = async (req: Request, res: Response): Promise<void> => {
-  const { publicAddress } = req.params;
-
-  if (!publicAddress) {
-    res.status(400).json({ message: 'Request should have publicAddress in params' });
-  }
-
-  const user = await User.findOne({ publicAddress });
-  if (user) {
-    res.status(200).json({ nonce: user.nonce });
-  } else {
-    res.status(404).json({ message: 'User is not found' });
   }
 };
 
@@ -89,6 +105,29 @@ export const authentication = async (req: Request, res: Response): Promise<void>
         });
       }
     }
+  } catch (err: any) {
+    console.log(err);
+    res.status(400).json({ message: `Error ${err}` });
+  }
+};
+
+export const changeUsername = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { id, username } = req.body;
+
+    if (!id || !username) {
+      res.status(400).json({ message: 'Request should have username and username' });
+    }
+
+    const user = await User.findOne({ id });
+
+    if (!user) {
+      res.status(500).json({ error: 'User is not found.' });
+      return;
+    }
+
+    user.username = username;
+    await user.save();
   } catch (err: any) {
     console.log(err);
     res.status(400).json({ message: `Error ${err}` });
