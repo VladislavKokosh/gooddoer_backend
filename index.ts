@@ -1,15 +1,30 @@
-import express, { type Express, type Request, type Response } from 'express';
+import express, { type Express } from 'express';
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import routes from './src/routes/index';
 
 dotenv.config();
 
+const PORT: string = process.env.PORT !== undefined ? process.env.PORT : '8000';
+const URL: string = process.env.MONGO_URI !== undefined ? process.env.MONGO_URI : '';
+
 const app: Express = express();
-const port: string = process.env.PORT !== undefined ? process.env.PORT : '8000';
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Init Project!');
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/', routes);
 
-app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`);
-});
+const start = async (): Promise<void> => {
+  try {
+    await mongoose.connect(URL);
+
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
+start();
