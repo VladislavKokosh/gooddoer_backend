@@ -32,7 +32,7 @@ export const getNonceByAddress = async (req: Request, res: Response): Promise<vo
   }
 
   const user = await User.findOne({ publicAddress });
-  console.log(user);
+
   if (user) {
     res.status(200).json({ nonce: user.nonce });
   } else {
