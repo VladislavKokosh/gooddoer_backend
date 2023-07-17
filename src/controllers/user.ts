@@ -2,11 +2,11 @@ import { type Request, type Response } from 'express';
 import { type Document } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 
-import { type IUser } from '../../models/User/user.types';
+import { type IUser } from '../models/User/user.types';
 import { recoverPersonalSignature } from 'eth-sig-util';
-import { createToken } from '../../passport/service';
+import { createToken, getUserIdByToken } from '../passport/service';
 
-import { User } from '../../models/User/user';
+import { User } from '../models/User/user';
 
 export const getUserById = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
@@ -86,18 +86,20 @@ export const authentication = async (req: Request, res: Response): Promise<void>
     const user = await User.findOne({ publicAddress });
 
     if (user) {
+      console.log(user.nonce);
       const message = `I am signing my one-time nonce: ${user.nonce}`;
-      const messageBufferHex = Buffer.from(message, 'utf8').toString('hex');
+      const messageBufferHex = `0x${Buffer.from(message, 'utf8').toString('hex')}`;
+      console.log(messageBufferHex);
       const address = recoverPersonalSignature({
         data: messageBufferHex,
         sig: signature,
       });
-
+      console.log(address, publicAddress);
       if (address.toLowerCase() === publicAddress.toLowerCase()) {
         user.nonce = uuidv4();
         await user.save();
 
-        const token = createToken(user.id, publicAddress);
+        const token = `Bearer ${createToken(user._id, publicAddress)}`;
 
         res.status(200).json({ accessToken: token });
       } else {
@@ -114,13 +116,23 @@ export const authentication = async (req: Request, res: Response): Promise<void>
 
 export const changeUsername = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { id, username } = req.body;
+    const { username } = req.body;
 
-    if (!id || !username) {
-      res.status(400).json({ message: 'Request should have username and username' });
+    if (!username) {
+      res.status(401).json({ message: 'Request should have username in body' });
     }
 
-    const user = await User.findOne({ _id: id });
+    const decodedToken = getUserIdByToken(req.headers);
+
+    if (!decodedToken) {
+      res.status(401).json({ message: 'Request should have Authorization in headers' });
+      return;
+    }
+
+    const userId = decodedToken && typeof decodedToken !== 'string' && decodedToken.userId;
+
+    const user = await User.findById(userId);
+
     if (!user) {
       res.status(500).json({ error: 'User is not found.' });
       return;
@@ -129,8 +141,7 @@ export const changeUsername = async (req: Request, res: Response): Promise<void>
     user.username = username;
     await user.save();
     res.status(200).json({ username });
-  } catch (err: any) {
-    console.log(err);
-    res.status(400).json({ message: `Error ${err}` });
+  } catch (e) {
+    console.log(e);
   }
 };
