@@ -11,7 +11,7 @@ const options = {
   secretOrKey: process.env.SECRET,
 };
 
-export default (passport: PassportStatic): void => {
+export default async (passport: PassportStatic): Promise<void> => {
   passport.use(
     new JwtStrategy(options, async (payload, done) => {
       try {

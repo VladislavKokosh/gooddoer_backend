@@ -1,6 +1,7 @@
 import express, { type Express } from 'express';
 import mongoose from 'mongoose';
 import passport from 'passport';
+import morgan from 'morgan';
 import dotenv from 'dotenv';
 import passportStrategy from './src/middleware/passport';
 import routes from './src/routes/index';
@@ -15,7 +16,9 @@ const app: Express = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
 passportStrategy(passport);
+app.use(morgan('tiny'));
 app.use('/', routes);
 
 const start = async (): Promise<void> => {
