@@ -35,3 +35,5 @@ const start = async (): Promise<void> => {
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 start();
+
+export default app;
