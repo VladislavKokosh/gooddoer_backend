@@ -13,10 +13,6 @@ router.get('/nonce/:publicAddress', (async (req, res) => {
   await userController.getNonceByAddress(req, res);
 }) as RequestHandler);
 
-router.post('/signup', (async (req, res) => {
-  await userController.newUser(req, res);
-}) as RequestHandler);
-
 router.post('/auth', (async (req, res) => {
   await userController.authentication(req, res);
 }) as RequestHandler);

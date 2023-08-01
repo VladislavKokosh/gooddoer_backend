@@ -45,9 +45,6 @@ router.get('/:id', ((req, res) => __awaiter(void 0, void 0, void 0, function* ()
 router.get('/nonce/:publicAddress', ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield userController.getNonceByAddress(req, res);
 })));
-router.post('/signup', ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    yield userController.newUser(req, res);
-})));
 router.post('/auth', ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield userController.authentication(req, res);
 })));

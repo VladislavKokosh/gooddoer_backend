@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.changeUsername = exports.authentication = exports.newUser = exports.getNonceByAddress = exports.getUserById = void 0;
+exports.changeUsername = exports.authentication = exports.getNonceByAddress = exports.getUserById = void 0;
 const uuid_1 = require("uuid");
 const eth_sig_util_1 = require("eth-sig-util");
 const service_1 = require("../passport/service");
@@ -38,27 +38,12 @@ const getNonceByAddress = (req, res) => __awaiter(void 0, void 0, void 0, functi
         res.status(200).json({ nonce: user.nonce });
     }
     else {
-        res.status(404).json({ message: 'User is not found' });
-    }
-});
-exports.getNonceByAddress = getNonceByAddress;
-const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const { publicAddress } = req.body;
-        if (!publicAddress) {
-            res.status(400).json({ message: 'Request should have publicAddress' });
-        }
-        const user = yield user_1.User.findOne({ publicAddress });
-        if (user) {
-            res.status(500).json({ error: 'User already exists.' });
-            return;
-        }
         const newUser = new user_1.User({
             publicAddress,
         });
         yield newUser
             .save()
-            .then((user) => res.status(200).json(user))
+            .then((user) => res.status(200).json(user.nonce))
             .catch((error) => {
             res.status(500).send({
                 message: error.message,
@@ -66,12 +51,8 @@ const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             res.status(500).json(error);
         });
     }
-    catch (err) {
-        console.log(err);
-        res.status(400).json({ message: `Error ${err}` });
-    }
 });
-exports.newUser = newUser;
+exports.getNonceByAddress = getNonceByAddress;
 const authentication = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { signature, publicAddress } = req.body;

@@ -36,41 +36,19 @@ export const getNonceByAddress = async (req: Request, res: Response): Promise<vo
   if (user) {
     res.status(200).json({ nonce: user.nonce });
   } else {
-    res.status(404).json({ message: 'User is not found' });
-  }
-};
-
-export const newUser = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const { publicAddress } = req.body;
-
-    if (!publicAddress) {
-      res.status(400).json({ message: 'Request should have publicAddress' });
-    }
-
-    const user = await User.findOne({ publicAddress });
-
-    if (user) {
-      res.status(500).json({ error: 'User already exists.' });
-      return;
-    }
-
     const newUser: IUser & Document = new User({
       publicAddress,
     });
 
     await newUser
       .save()
-      .then((user) => res.status(200).json(user))
+      .then((user) => res.status(200).json(user.nonce))
       .catch((error: any) => {
         res.status(500).send({
           message: error.message,
         });
         res.status(500).json(error);
       });
-  } catch (err: any) {
-    console.log(err);
-    res.status(400).json({ message: `Error ${err}` });
   }
 };
 
