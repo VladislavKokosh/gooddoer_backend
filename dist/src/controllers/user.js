@@ -35,7 +35,7 @@ const getNonceByAddress = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
     const user = yield user_1.User.findOne({ publicAddress });
     if (user) {
-        res.status(200).json({ nonce: user.nonce });
+        res.status(200).json(user.nonce);
     }
     else {
         const newUser = new user_1.User({
