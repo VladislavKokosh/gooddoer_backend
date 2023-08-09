@@ -9,13 +9,22 @@ import { createToken, getUserIdByToken } from '../passport/service';
 import { User } from '../models/User/user';
 
 export const getUserById = async (req: Request, res: Response): Promise<void> => {
-  const { id } = req.params;
+  const { username } = req.body;
 
-  if (!id) {
-    res.status(400).json({ message: 'Request should have id in params' });
+  if (!username) {
+    res.status(401).json({ message: 'Request should have username in body' });
   }
 
-  const user = await User.findOne({ _id: id });
+  const decodedToken = getUserIdByToken(req.headers);
+
+  if (!decodedToken) {
+    res.status(401).json({ message: 'Request should have Authorization in headers' });
+    return;
+  }
+
+  const userId = decodedToken && typeof decodedToken !== 'string' && decodedToken.userId;
+
+  const user = await User.findById(userId);
 
   if (user) {
     res.status(200).json({ user });

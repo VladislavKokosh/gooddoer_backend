@@ -15,11 +15,17 @@ const eth_sig_util_1 = require("eth-sig-util");
 const service_1 = require("../passport/service");
 const user_1 = require("../models/User/user");
 const getUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = req.params;
-    if (!id) {
-        res.status(400).json({ message: 'Request should have id in params' });
+    const { username } = req.body;
+    if (!username) {
+        res.status(401).json({ message: 'Request should have username in body' });
     }
-    const user = yield user_1.User.findOne({ _id: id });
+    const decodedToken = (0, service_1.getUserIdByToken)(req.headers);
+    if (!decodedToken) {
+        res.status(401).json({ message: 'Request should have Authorization in headers' });
+        return;
+    }
+    const userId = decodedToken && typeof decodedToken !== 'string' && decodedToken.userId;
+    const user = yield user_1.User.findById(userId);
     if (user) {
         res.status(200).json({ user });
     }
