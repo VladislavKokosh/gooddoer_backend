@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/VladislavKokosh/gooddoer_backend#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "eth-sig-util": "^3.0.1",
     "ethers": "^6.6.0",
@@ -43,6 +44,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/mongoose": "^5.11.97",

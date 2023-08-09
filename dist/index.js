@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const passport_1 = __importDefault(require("passport"));
 const morgan_1 = __importDefault(require("morgan"));
@@ -23,6 +24,7 @@ dotenv_1.default.config();
 const PORT = process.env.PORT !== undefined ? process.env.PORT : '8000';
 const URL = process.env.MONGO_URI !== undefined ? process.env.MONGO_URI : '';
 const app = (0, express_1.default)();
+app.use((0, cors_1.default)({ origin: 'http://localhost:3000' }));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(passport_1.default.initialize());

@@ -1,4 +1,5 @@
 import express, { type Express } from 'express';
+import cors from 'cors';
 import mongoose from 'mongoose';
 import passport from 'passport';
 import morgan from 'morgan';
@@ -13,6 +14,7 @@ const URL: string = process.env.MONGO_URI !== undefined ? process.env.MONGO_URI 
 
 const app: Express = express();
 
+app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
