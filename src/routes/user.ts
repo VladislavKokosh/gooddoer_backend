@@ -5,7 +5,7 @@ import * as userController from '../controllers/user';
 
 const router = Router();
 
-router.get('/:id', (async (req, res) => {
+router.get('/', (async (req, res) => {
   await userController.getUserById(req, res);
 }) as RequestHandler);
 

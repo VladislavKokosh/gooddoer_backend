@@ -9,12 +9,6 @@ import { createToken, getUserIdByToken } from '../passport/service';
 import { User } from '../models/User/user';
 
 export const getUserById = async (req: Request, res: Response): Promise<void> => {
-  const { username } = req.body;
-
-  if (!username) {
-    res.status(401).json({ message: 'Request should have username in body' });
-  }
-
   const decodedToken = getUserIdByToken(req.headers);
 
   if (!decodedToken) {

@@ -39,7 +39,7 @@ const passport_1 = __importDefault(require("passport"));
 const express_1 = require("express");
 const userController = __importStar(require("../controllers/user"));
 const router = (0, express_1.Router)();
-router.get('/:id', ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/', ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield userController.getUserById(req, res);
 })));
 router.get('/nonce/:publicAddress', ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
