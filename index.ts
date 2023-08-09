@@ -14,7 +14,11 @@ const URL: string = process.env.MONGO_URI !== undefined ? process.env.MONGO_URI 
 
 const app: Express = express();
 
-app.use(cors({ origin: ['https://gooddoer.netlify.app/', 'http://localhost:3000'] }));
+app.use(
+  cors({
+    origin: ['https://gooddoer.netlify.app', 'http://localhost:3000'],
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
