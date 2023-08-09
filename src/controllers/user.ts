@@ -34,7 +34,7 @@ export const getNonceByAddress = async (req: Request, res: Response): Promise<vo
   const user = await User.findOne({ publicAddress });
 
   if (user) {
-    res.status(200).json({ nonce: user.nonce });
+    res.status(200).json(user.nonce);
   } else {
     const newUser: IUser & Document = new User({
       publicAddress,
@@ -42,7 +42,7 @@ export const getNonceByAddress = async (req: Request, res: Response): Promise<vo
 
     await newUser
       .save()
-      .then((user) => res.status(200).json({ nonce: user.nonce }))
+      .then((user) => res.status(200).json(user.nonce))
       .catch((error: any) => {
         res.status(500).send({
           message: error.message,
