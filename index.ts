@@ -16,7 +16,7 @@ const app: Express = express();
 
 app.use(
   cors({
-    origin: ['https://gooddoer.netlify.app', 'http://localhost:3000'],
+    origin: '*',
   })
 );
 app.use(express.json());
