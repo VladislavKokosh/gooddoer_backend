@@ -12,8 +12,7 @@ export const downloadFile = async (req: Request, res: Response): Promise<void> =
 
   res.sendFile(filePath, (err) => {
     if (err) {
-      console.error(err);
-      res.status(500).send('Error serving the file');
+      res.status(500).send(err);
     }
   });
 };
