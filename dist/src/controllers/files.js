@@ -22,8 +22,7 @@ const downloadFile = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     const filePath = path_1.default.join(__dirname, '../../uploads', filename);
     res.sendFile(filePath, (err) => {
         if (err) {
-            console.error(err);
-            res.status(500).send('Error serving the file');
+            res.status(500).send(err);
         }
     });
 });
