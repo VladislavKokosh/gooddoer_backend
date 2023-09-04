@@ -25,7 +25,7 @@ const PORT = process.env.PORT !== undefined ? process.env.PORT : '8000';
 const URL = process.env.MONGO_URI !== undefined ? process.env.MONGO_URI : '';
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
-    origin: ['https://gooddoer.netlify.app', 'http://localhost:3000'],
+    origin: '*',
 }));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
