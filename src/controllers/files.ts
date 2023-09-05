@@ -18,7 +18,7 @@ export const downloadFile = async (req: Request, res: Response): Promise<void> =
 };
 
 export const uploadFile = async (req: Request, res: Response): Promise<void> => {
-  const fileName = req.file.fieldname;
+  const fileName = req.file.filename;
 
   res.status(200).json({ fileName });
 };

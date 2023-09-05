@@ -28,7 +28,7 @@ const downloadFile = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.downloadFile = downloadFile;
 const uploadFile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const fileName = req.file.fieldname;
+    const fileName = req.file.filename;
     res.status(200).json({ fileName });
 });
 exports.uploadFile = uploadFile;
