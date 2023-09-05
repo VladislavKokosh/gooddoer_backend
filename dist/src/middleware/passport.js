@@ -21,7 +21,9 @@ const options = {
     secretOrKey: process.env.SECRET,
 };
 exports.default = (passport) => __awaiter(void 0, void 0, void 0, function* () {
-    passport.use(new passport_jwt_1.Strategy(options, (payload, done) => __awaiter(void 0, void 0, void 0, function* () {
+    passport.use(
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    new passport_jwt_1.Strategy(options, (payload, done) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const user = yield user_1.User.findById(payload.userId).select('');
             if (user) {

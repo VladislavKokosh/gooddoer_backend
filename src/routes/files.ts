@@ -5,13 +5,9 @@ import { upload } from '../middleware/upload';
 
 const router = Router();
 
-router.get('/:filename', (async (req, res) => {
-  await uploadController.downloadFile(req, res);
-}) as RequestHandler);
-
 router.post('/', upload.single('file'), (async (req, res) => {
   try {
-    await uploadController.uploadFile(req, res);
+    await uploadController.web3StorageUpload(req, res);
   } catch (e) {
     console.log(e);
   }

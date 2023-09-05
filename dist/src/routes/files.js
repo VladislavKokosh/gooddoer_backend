@@ -36,12 +36,9 @@ const express_1 = require("express");
 const uploadController = __importStar(require("../controllers/files"));
 const upload_1 = require("../middleware/upload");
 const router = (0, express_1.Router)();
-router.get('/:filename', ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    yield uploadController.downloadFile(req, res);
-})));
 router.post('/', upload_1.upload.single('file'), ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield uploadController.uploadFile(req, res);
+        yield uploadController.web3StorageUpload(req, res);
     }
     catch (e) {
         console.log(e);
