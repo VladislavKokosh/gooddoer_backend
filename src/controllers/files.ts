@@ -8,7 +8,7 @@ export const downloadFile = async (req: Request, res: Response): Promise<void> =
     res.status(400).json({ message: 'Request should have filename in params' });
   }
 
-  const filePath = path.join(__dirname, '../../dist/src/uploads', filename);
+  const filePath = path.join(__dirname, '../../uploads', filename);
 
   res.sendFile(filePath, (err) => {
     if (err) {
