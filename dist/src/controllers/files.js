@@ -19,7 +19,7 @@ const downloadFile = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     if (!filename) {
         res.status(400).json({ message: 'Request should have filename in params' });
     }
-    const filePath = path_1.default.join(__dirname, '../../uploads', filename);
+    const filePath = path_1.default.join(__dirname, '../../dist/src/uploads', filename);
     res.sendFile(filePath, (err) => {
         if (err) {
             res.status(500).send(err);
