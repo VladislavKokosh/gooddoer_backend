@@ -2,22 +2,6 @@ import { type Request, type Response } from 'express';
 import { fileFromPath, makeFileObjects, storeFiles } from '../storage';
 import { toBytes32 } from '../utils';
 
-// export const downloadFile = async (req: Request, res: Response): Promise<void> => {
-//   const { filename } = req.params;
-
-//   if (!filename) {
-//     res.status(400).json({ message: 'Request should have filename in params' });
-//   }
-
-//   const filePath = path.join(__dirname, '../../uploads', filename);
-
-//   res.sendFile(filePath, (err) => {
-//     if (err) {
-//       res.status(500).send(err);
-//     }
-//   });
-// };
-
 export const web3StorageUpload = async (req: Request, res: Response): Promise<void> => {
   const reqFile = req.file;
 
