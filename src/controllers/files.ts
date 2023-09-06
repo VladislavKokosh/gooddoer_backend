@@ -20,7 +20,7 @@ import { toBytes32 } from '../utils';
 
 export const web3StorageUpload = async (req: Request, res: Response): Promise<void> => {
   const reqFile = req.file;
-  console.log(reqFile);
+
   console.log(`Uploading image: [${reqFile.originalname}] to ipfs.`);
 
   if (!reqFile) {
@@ -28,15 +28,15 @@ export const web3StorageUpload = async (req: Request, res: Response): Promise<vo
   }
 
   const imageName = `${toBytes32(new Date().getTime().toString() + '_' + reqFile.originalname)}`;
-  console.log(imageName);
+
   const file = await fileFromPath(reqFile, imageName);
-  console.log(file);
+
   const imageCid = await storeFiles(file);
-  console.log(imageCid);
+
   const files = await makeFileObjects(imageName, `https://${imageCid}.ipfs.w3s.link/${imageName}`);
-  console.log(files);
+
   const metaDataCid = await storeFiles(files);
-  console.log(metaDataCid);
+
   const metadataUrl = `https://${metaDataCid}.ipfs.w3s.link/metadata.json`;
 
   const ipfsTierInfo = {

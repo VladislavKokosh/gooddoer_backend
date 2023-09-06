@@ -13,6 +13,7 @@ const options = {
 
 export default async (passport: PassportStatic): Promise<void> => {
   passport.use(
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     new JwtStrategy(options, async (payload, done) => {
       try {
         const user = await User.findById(payload.userId).select('');

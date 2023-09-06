@@ -26,21 +26,15 @@ const utils_1 = require("../utils");
 // };
 const web3StorageUpload = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const reqFile = req.file;
-    console.log(reqFile);
     console.log(`Uploading image: [${reqFile.originalname}] to ipfs.`);
     if (!reqFile) {
         res.status(401).send({ message: 'invalid input' });
     }
     const imageName = `${(0, utils_1.toBytes32)(new Date().getTime().toString() + '_' + reqFile.originalname)}`;
-    console.log(imageName);
     const file = yield (0, storage_1.fileFromPath)(reqFile, imageName);
-    console.log(file);
     const imageCid = yield (0, storage_1.storeFiles)(file);
-    console.log(imageCid);
     const files = yield (0, storage_1.makeFileObjects)(imageName, `https://${imageCid}.ipfs.w3s.link/${imageName}`);
-    console.log(files);
     const metaDataCid = yield (0, storage_1.storeFiles)(files);
-    console.log(metaDataCid);
     const metadataUrl = `https://${metaDataCid}.ipfs.w3s.link/metadata.json`;
     const ipfsTierInfo = {
         name: reqFile.originalname.slice(0, reqFile.originalname.indexOf('.')),
