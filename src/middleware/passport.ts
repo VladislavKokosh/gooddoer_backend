@@ -1,5 +1,5 @@
-import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import dotenv from 'dotenv';
+import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import { type PassportStatic } from 'passport';
 
 import { User } from '../models/User/user';
