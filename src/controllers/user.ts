@@ -47,10 +47,9 @@ export const getNonceByAddress = async (req: Request, res: Response): Promise<vo
       .save()
       .then((user) => res.status(200).json(user.nonce))
       .catch((error: any) => {
-        res.status(500).send({
+        res.status(500).json({
           message: error.message,
         });
-        res.status(500).json(error);
       });
   }
 };
@@ -67,15 +66,14 @@ export const authentication = async (req: Request, res: Response): Promise<void>
     const user = await User.findOne({ publicAddress });
 
     if (user) {
-      console.log(user.nonce);
       const message = `I am signing my one-time nonce: ${user.nonce}`;
       const messageBufferHex = `0x${Buffer.from(message, 'utf8').toString('hex')}`;
-      console.log(messageBufferHex);
+
       const address = recoverPersonalSignature({
         data: messageBufferHex,
         sig: signature,
       });
-      console.log(address, publicAddress);
+
       if (address.toLowerCase() === publicAddress.toLowerCase()) {
         user.nonce = uuidv4();
         await user.save();
@@ -90,7 +88,6 @@ export const authentication = async (req: Request, res: Response): Promise<void>
       }
     }
   } catch (err: any) {
-    console.log(err);
     res.status(400).json({ message: `Error ${err}` });
   }
 };
@@ -122,7 +119,7 @@ export const changeUsername = async (req: Request, res: Response): Promise<void>
     user.username = username;
     await user.save();
     res.status(200).json({ username });
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    res.status(400).json({ message: `Error ${err}` });
   }
 };
