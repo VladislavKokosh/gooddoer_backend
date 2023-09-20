@@ -6,7 +6,7 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import passportStrategy from './src/middleware/passport';
 import routes from './src/routes/index';
-import { listenGooddoerFactory } from './src/listeners';
+// import { listenGooddoerFactory } from './src/listeners';
 
 dotenv.config();
 

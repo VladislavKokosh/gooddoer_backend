@@ -20,6 +20,7 @@ const morgan_1 = __importDefault(require("morgan"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const passport_2 = __importDefault(require("./src/middleware/passport"));
 const index_1 = __importDefault(require("./src/routes/index"));
+// import { listenGooddoerFactory } from './src/listeners';
 dotenv_1.default.config();
 const PORT = process.env.PORT !== undefined ? process.env.PORT : '8000';
 const URL = process.env.MONGO_URI !== undefined ? process.env.MONGO_URI : '';
