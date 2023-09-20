@@ -35,8 +35,8 @@ const start = async (): Promise<void> => {
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
-
-    listenGooddoerFactory();
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    // listenGooddoerFactory();
   } catch (error) {
     console.log(error);
   }

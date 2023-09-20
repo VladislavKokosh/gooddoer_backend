@@ -20,7 +20,6 @@ const morgan_1 = __importDefault(require("morgan"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const passport_2 = __importDefault(require("./src/middleware/passport"));
 const index_1 = __importDefault(require("./src/routes/index"));
-const listeners_1 = require("./src/listeners");
 dotenv_1.default.config();
 const PORT = process.env.PORT !== undefined ? process.env.PORT : '8000';
 const URL = process.env.MONGO_URI !== undefined ? process.env.MONGO_URI : '';
@@ -41,7 +40,8 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);
         });
-        (0, listeners_1.listenGooddoerFactory)();
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        // listenGooddoerFactory();
     }
     catch (error) {
         console.log(error);
