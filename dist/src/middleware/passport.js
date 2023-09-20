@@ -33,8 +33,8 @@ exports.default = (passport) => __awaiter(void 0, void 0, void 0, function* () {
                 done(null, false);
             }
         }
-        catch (e) {
-            console.log(e);
+        catch (error) {
+            console.log(error);
         }
     })));
 });

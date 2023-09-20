@@ -87,8 +87,8 @@ export const authentication = async (req: Request, res: Response): Promise<void>
         });
       }
     }
-  } catch (err: any) {
-    res.status(400).json({ message: `Error ${err}` });
+  } catch (error: any) {
+    res.status(400).json({ message: `Error ${error}` });
   }
 };
 
@@ -119,7 +119,7 @@ export const changeUsername = async (req: Request, res: Response): Promise<void>
     user.username = username;
     await user.save();
     res.status(200).json({ username });
-  } catch (err) {
-    res.status(400).json({ message: `Error ${err}` });
+  } catch (error) {
+    res.status(400).json({ message: `Error ${error}` });
   }
 };

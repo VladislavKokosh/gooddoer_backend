@@ -43,8 +43,8 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
         });
         (0, listeners_1.listenGooddoerFactory)();
     }
-    catch (e) {
-        console.log(e);
+    catch (error) {
+        console.log(error);
     }
 });
 // eslint-disable-next-line @typescript-eslint/no-floating-promises

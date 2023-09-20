@@ -8,9 +8,9 @@ export const getFundraisers = async (_req: Request, res: Response): Promise<void
   try {
     const fundraisers = await Fundraiser.find();
     res.status(200).json(fundraisers);
-  } catch (err) {
+  } catch (error) {
     res.status(401).json({
-      message: err.message,
+      message: error.message,
     });
   }
 };
@@ -33,10 +33,10 @@ export const writeNewFundraiser = async (
       documentHash,
     });
 
-    await newFundraiser.save().catch((err: any) => {
-      console.log(err);
+    await newFundraiser.save().catch((error: any) => {
+      console.log(error);
     });
-  } catch (err: any) {
-    console.log(err);
+  } catch (error: any) {
+    console.log(error);
   }
 };

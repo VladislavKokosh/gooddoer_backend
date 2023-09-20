@@ -82,8 +82,8 @@ const authentication = (req, res) => __awaiter(void 0, void 0, void 0, function*
             }
         }
     }
-    catch (err) {
-        res.status(400).json({ message: `Error ${err}` });
+    catch (error) {
+        res.status(400).json({ message: `Error ${error}` });
     }
 });
 exports.authentication = authentication;
@@ -108,8 +108,8 @@ const changeUsername = (req, res) => __awaiter(void 0, void 0, void 0, function*
         yield user.save();
         res.status(200).json({ username });
     }
-    catch (err) {
-        res.status(400).json({ message: `Error ${err}` });
+    catch (error) {
+        res.status(400).json({ message: `Error ${error}` });
     }
 });
 exports.changeUsername = changeUsername;

@@ -40,8 +40,8 @@ router.post('/', upload_1.upload.single('file'), ((req, res) => __awaiter(void 0
     try {
         yield uploadController.web3StorageUpload(req, res);
     }
-    catch (e) {
-        console.log(e);
+    catch (error) {
+        console.log(error);
     }
 })));
 exports.default = router;

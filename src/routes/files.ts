@@ -8,8 +8,8 @@ const router = Router();
 router.post('/', upload.single('file'), (async (req, res) => {
   try {
     await uploadController.web3StorageUpload(req, res);
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    console.log(error);
   }
 }) as RequestHandler);
 

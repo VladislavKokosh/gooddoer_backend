@@ -16,9 +16,9 @@ const getFundraisers = (_req, res) => __awaiter(void 0, void 0, void 0, function
         const fundraisers = yield fundraiser_1.Fundraiser.find();
         res.status(200).json(fundraisers);
     }
-    catch (err) {
+    catch (error) {
         res.status(401).json({
-            message: err.message,
+            message: error.message,
         });
     }
 });
@@ -33,12 +33,12 @@ const writeNewFundraiser = (fundraiserAddress, fundraisingAmount, beneficiary, d
             documentUri,
             documentHash,
         });
-        yield newFundraiser.save().catch((err) => {
-            console.log(err);
+        yield newFundraiser.save().catch((error) => {
+            console.log(error);
         });
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        console.log(error);
     }
 });
 exports.writeNewFundraiser = writeNewFundraiser;

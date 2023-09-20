@@ -23,8 +23,8 @@ export default async (passport: PassportStatic): Promise<void> => {
         } else {
           done(null, false);
         }
-      } catch (e) {
-        console.log(e);
+      } catch (error) {
+        console.log(error);
       }
     })
   );

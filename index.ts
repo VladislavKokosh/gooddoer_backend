@@ -37,8 +37,8 @@ const start = async (): Promise<void> => {
     });
 
     listenGooddoerFactory();
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    console.log(error);
   }
 };
 
