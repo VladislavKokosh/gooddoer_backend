@@ -22,14 +22,18 @@ const listenGooddoerFactory = async (): Promise<void> => {
       documentUri: string,
       documentHash: string
     ) => {
-      await writeNewFundraiser(
-        fundraiserAddress,
-        fundraisingAmount,
-        beneficiary,
-        documentName,
-        documentUri,
-        documentHash
-      );
+      try {
+        await writeNewFundraiser(
+          fundraiserAddress,
+          fundraisingAmount,
+          beneficiary,
+          documentName,
+          documentUri,
+          documentHash
+        );
+      } catch (error) {
+        console.log(error);
+      }
     }
   );
 };

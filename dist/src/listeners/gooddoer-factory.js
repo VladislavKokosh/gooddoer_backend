@@ -26,7 +26,12 @@ const listenGooddoerFactory = () => __awaiter(void 0, void 0, void 0, function* 
     contractFactory.on('FundraiserCreated', 
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     (fundraiserAddress, fundraisingAmount, beneficiary, documentName, documentUri, documentHash) => __awaiter(void 0, void 0, void 0, function* () {
-        yield (0, fundraisers_1.writeNewFundraiser)(fundraiserAddress, fundraisingAmount, beneficiary, documentName, documentUri, documentHash);
+        try {
+            yield (0, fundraisers_1.writeNewFundraiser)(fundraiserAddress, fundraisingAmount, beneficiary, documentName, documentUri, documentHash);
+        }
+        catch (error) {
+            console.log(error);
+        }
     }));
 });
 exports.listenGooddoerFactory = listenGooddoerFactory;

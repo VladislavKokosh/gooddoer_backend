@@ -1,5 +1,4 @@
 import express, { type Express } from 'express';
-import cors from 'cors';
 import mongoose from 'mongoose';
 import passport from 'passport';
 import morgan from 'morgan';
@@ -15,11 +14,15 @@ const URL: string = process.env.MONGO_URI !== undefined ? process.env.MONGO_URI 
 
 const app: Express = express();
 
-app.use(
-  cors({
-    origin: '*',
-  })
-);
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization'
+  );
+  next();
+});
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
