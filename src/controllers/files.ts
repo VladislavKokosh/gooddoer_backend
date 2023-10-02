@@ -3,13 +3,12 @@ import { fileFromPath, makeFileObjects, storeFiles } from '../storage';
 import { toBytes32 } from '../utils';
 
 export const web3StorageUpload = async (req: Request, res: Response): Promise<void> => {
-  const { projectName, projectDescription } = req.params;
   const reqFile = req.file;
 
   console.log(`Uploading image: [${reqFile.originalname}] to ipfs.`);
 
-  if (!reqFile || !projectName || !projectDescription) {
-    res.status(401).send({ message: 'Invalid input' });
+  if (!reqFile) {
+    res.status(401).send({ message: 'invalid input' });
   }
 
   const imageName = `${toBytes32(new Date().getTime().toString() + '_' + reqFile.originalname)}`;
@@ -18,12 +17,7 @@ export const web3StorageUpload = async (req: Request, res: Response): Promise<vo
 
   const imageCid = await storeFiles(file);
 
-  const files = await makeFileObjects(
-    imageName,
-    `https://${imageCid}.ipfs.w3s.link/${imageName}`,
-    projectName,
-    projectDescription
-  );
+  const files = await makeFileObjects(imageName, `https://${imageCid}.ipfs.w3s.link/${imageName}`);
 
   const metaDataCid = await storeFiles(files);
 
