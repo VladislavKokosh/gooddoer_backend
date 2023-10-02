@@ -33,9 +33,7 @@ const writeNewFundraiser = (fundraiserAddress, fundraisingAmount, beneficiary, d
             documentUri,
             documentHash,
         });
-        yield newFundraiser.save().catch((error) => {
-            console.log(error);
-        });
+        yield newFundraiser.save();
     }
     catch (error) {
         console.log(error);

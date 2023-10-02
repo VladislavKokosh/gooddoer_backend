@@ -33,9 +33,7 @@ export const writeNewFundraiser = async (
       documentHash,
     });
 
-    await newFundraiser.save().catch((error: any) => {
-      console.log(error);
-    });
+    await newFundraiser.save();
   } catch (error: any) {
     console.log(error);
   }

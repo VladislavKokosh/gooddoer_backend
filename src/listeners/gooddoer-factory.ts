@@ -4,7 +4,7 @@ import factoryArtifact from '../artifacts/GooddoerFactory.json';
 import { writeNewFundraiser } from '../controllers/fundraisers';
 dotenv.config();
 
-const listenGooddoerFactory = async (): Promise<void> => {
+const listenGooddoerFactory = (): void => {
   const contractFactoryAddress = process.env.GOODDOER_FACTORY_ADDRESS;
   const provider = new ethers.WebSocketProvider(`wss://eth-goerli.g.alchemy.com/v2/${process.env.WEBSOCKET_TOKEN}`);
 
@@ -22,18 +22,14 @@ const listenGooddoerFactory = async (): Promise<void> => {
       documentUri: string,
       documentHash: string
     ) => {
-      try {
-        await writeNewFundraiser(
-          fundraiserAddress,
-          fundraisingAmount,
-          beneficiary,
-          documentName,
-          documentUri,
-          documentHash
-        );
-      } catch (error) {
-        console.log(error);
-      }
+      await writeNewFundraiser(
+        fundraiserAddress,
+        fundraisingAmount,
+        beneficiary,
+        documentName,
+        documentUri,
+        documentHash
+      );
     }
   );
 };

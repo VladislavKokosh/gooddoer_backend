@@ -18,7 +18,7 @@ const ethers_1 = require("ethers");
 const GooddoerFactory_json_1 = __importDefault(require("../artifacts/GooddoerFactory.json"));
 const fundraisers_1 = require("../controllers/fundraisers");
 dotenv_1.default.config();
-const listenGooddoerFactory = () => __awaiter(void 0, void 0, void 0, function* () {
+const listenGooddoerFactory = () => {
     const contractFactoryAddress = process.env.GOODDOER_FACTORY_ADDRESS;
     const provider = new ethers_1.ethers.WebSocketProvider(`wss://eth-goerli.g.alchemy.com/v2/${process.env.WEBSOCKET_TOKEN}`);
     const contractFactory = new ethers_1.ethers.Contract(contractFactoryAddress, GooddoerFactory_json_1.default.abi, provider);
@@ -26,13 +26,8 @@ const listenGooddoerFactory = () => __awaiter(void 0, void 0, void 0, function* 
     contractFactory.on('FundraiserCreated', 
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     (fundraiserAddress, fundraisingAmount, beneficiary, documentName, documentUri, documentHash) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            yield (0, fundraisers_1.writeNewFundraiser)(fundraiserAddress, fundraisingAmount, beneficiary, documentName, documentUri, documentHash);
-        }
-        catch (error) {
-            console.log(error);
-        }
+        yield (0, fundraisers_1.writeNewFundraiser)(fundraiserAddress, fundraisingAmount, beneficiary, documentName, documentUri, documentHash);
     }));
-});
+};
 exports.listenGooddoerFactory = listenGooddoerFactory;
 //# sourceMappingURL=gooddoer-factory.js.map

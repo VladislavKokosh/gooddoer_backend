@@ -44,7 +44,6 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
             console.log(`Server is running on port ${PORT}`);
         });
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        (0, listeners_1.listenGooddoerFactory)();
     }
     catch (error) {
         console.log(error);
@@ -52,5 +51,6 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 start();
+(0, listeners_1.listenGooddoerFactory)();
 exports.default = app;
 //# sourceMappingURL=index.js.map
