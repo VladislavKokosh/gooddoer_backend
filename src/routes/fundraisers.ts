@@ -8,4 +8,8 @@ router.get('/', (async (req, res) => {
   await fundraiserController.getFundraisers(req, res);
 }) as RequestHandler);
 
+router.post('/', (async (req, res) => {
+  await fundraiserController.writeNewFundraiser(req, res);
+}) as RequestHandler);
+
 export default router;

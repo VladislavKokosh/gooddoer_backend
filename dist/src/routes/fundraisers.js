@@ -38,5 +38,8 @@ const router = (0, express_1.Router)();
 router.get('/', ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield fundraiserController.getFundraisers(req, res);
 })));
+router.post('/', ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield fundraiserController.writeNewFundraiser(req, res);
+})));
 exports.default = router;
 //# sourceMappingURL=fundraisers.js.map

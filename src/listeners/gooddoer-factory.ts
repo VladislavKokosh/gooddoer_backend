@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 import { ethers } from 'ethers';
 import factoryArtifact from '../artifacts/GooddoerFactory.json';
-import { writeNewFundraiser } from '../controllers/fundraisers';
 dotenv.config();
 
 const listenGooddoerFactory = (): void => {
@@ -21,16 +20,7 @@ const listenGooddoerFactory = (): void => {
       documentName: string,
       documentUri: string,
       documentHash: string
-    ) => {
-      await writeNewFundraiser(
-        fundraiserAddress,
-        fundraisingAmount,
-        beneficiary,
-        documentName,
-        documentUri,
-        documentHash
-      );
-    }
+    ) => {}
   );
 };
 

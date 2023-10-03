@@ -3,6 +3,15 @@ import { type IFundraiser } from './fundraiser.types';
 import { isValidEthAddress } from '../../utils';
 
 const userSchema = new Schema<IFundraiser>({
+  name: {
+    type: String,
+    required: [true, 'A name project is required'],
+    unique: true,
+  },
+  description: {
+    type: String,
+    required: [true, 'A description project is required'],
+  },
   fundraiserAddress: {
     type: String,
     required: [true, 'A fundraiserAddress is required'],
@@ -27,18 +36,6 @@ const userSchema = new Schema<IFundraiser>({
       },
       message: 'Address is not valid!',
     },
-  },
-  documentName: {
-    type: String,
-    require: [true, 'A documentName is required'],
-  },
-  documentUri: {
-    type: String,
-    require: [true, 'A documentUri is required'],
-  },
-  documentHash: {
-    type: String,
-    require: [true, 'A documentHash is required'],
   },
 });
 

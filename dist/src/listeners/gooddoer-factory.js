@@ -16,7 +16,6 @@ exports.listenGooddoerFactory = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 const ethers_1 = require("ethers");
 const GooddoerFactory_json_1 = __importDefault(require("../artifacts/GooddoerFactory.json"));
-const fundraisers_1 = require("../controllers/fundraisers");
 dotenv_1.default.config();
 const listenGooddoerFactory = () => {
     const contractFactoryAddress = process.env.GOODDOER_FACTORY_ADDRESS;
@@ -25,9 +24,7 @@ const listenGooddoerFactory = () => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     contractFactory.on('FundraiserCreated', 
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    (fundraiserAddress, fundraisingAmount, beneficiary, documentName, documentUri, documentHash) => __awaiter(void 0, void 0, void 0, function* () {
-        yield (0, fundraisers_1.writeNewFundraiser)(fundraiserAddress, fundraisingAmount, beneficiary, documentName, documentUri, documentHash);
-    }));
+    (fundraiserAddress, fundraisingAmount, beneficiary, documentName, documentUri, documentHash) => __awaiter(void 0, void 0, void 0, function* () { }));
 };
 exports.listenGooddoerFactory = listenGooddoerFactory;
 //# sourceMappingURL=gooddoer-factory.js.map

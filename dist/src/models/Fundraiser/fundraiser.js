@@ -4,6 +4,15 @@ exports.Fundraiser = void 0;
 const mongoose_1 = require("mongoose");
 const utils_1 = require("../../utils");
 const userSchema = new mongoose_1.Schema({
+    name: {
+        type: String,
+        required: [true, 'A name project is required'],
+        unique: true,
+    },
+    description: {
+        type: String,
+        required: [true, 'A description project is required'],
+    },
     fundraiserAddress: {
         type: String,
         required: [true, 'A fundraiserAddress is required'],
@@ -28,18 +37,6 @@ const userSchema = new mongoose_1.Schema({
             },
             message: 'Address is not valid!',
         },
-    },
-    documentName: {
-        type: String,
-        require: [true, 'A documentName is required'],
-    },
-    documentUri: {
-        type: String,
-        require: [true, 'A documentUri is required'],
-    },
-    documentHash: {
-        type: String,
-        require: [true, 'A documentHash is required'],
     },
 });
 exports.Fundraiser = (0, mongoose_1.model)('Fundraiser', userSchema);
