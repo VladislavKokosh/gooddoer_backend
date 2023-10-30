@@ -38,6 +38,10 @@ const userSchema = new mongoose_1.Schema({
             message: 'Address is not valid!',
         },
     },
+    category: {
+        type: String,
+        require: [true, 'A category is required'],
+    },
 });
 exports.Fundraiser = (0, mongoose_1.model)('Fundraiser', userSchema);
 //# sourceMappingURL=fundraiser.js.map

@@ -37,6 +37,10 @@ const userSchema = new Schema<IFundraiser>({
       message: 'Address is not valid!',
     },
   },
+  category: {
+    type: String,
+    require: [true, 'A category is required'],
+  },
 });
 
 export const Fundraiser = model<IFundraiser & Document>('Fundraiser', userSchema);

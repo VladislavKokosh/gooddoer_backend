@@ -6,6 +6,7 @@ interface IFundraiser extends Document {
   fundraiserAddress: string;
   fundraisingAmount: string;
   beneficiary: string;
+  category: string;
 }
 
 export type { IFundraiser };

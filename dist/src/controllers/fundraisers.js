@@ -25,8 +25,8 @@ const getFundraisers = (_req, res) => __awaiter(void 0, void 0, void 0, function
 exports.getFundraisers = getFundraisers;
 const writeNewFundraiser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { name, description, fundraiserAddress, fundraisingAmount, beneficiary } = req.body;
-        if (!name || !description || !fundraiserAddress || !fundraisingAmount || !beneficiary) {
+        const { name, description, fundraiserAddress, fundraisingAmount, beneficiary, category } = req.body;
+        if (!name || !description || !fundraiserAddress || !fundraisingAmount || !beneficiary || !category) {
             res
                 .status(400)
                 .send({ error: 'Request should have name, description, fundraiserAddress, fundraisingAmount, beneficiary' });
@@ -38,6 +38,7 @@ const writeNewFundraiser = (req, res) => __awaiter(void 0, void 0, void 0, funct
             fundraiserAddress,
             fundraisingAmount,
             beneficiary,
+            category,
         });
         yield newFundraiser.save();
         res.status(200);

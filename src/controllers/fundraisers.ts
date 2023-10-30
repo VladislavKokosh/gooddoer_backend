@@ -17,9 +17,9 @@ export const getFundraisers = async (_req: Request, res: Response): Promise<void
 
 export const writeNewFundraiser = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { name, description, fundraiserAddress, fundraisingAmount, beneficiary } = req.body;
+    const { name, description, fundraiserAddress, fundraisingAmount, beneficiary, category } = req.body;
 
-    if (!name || !description || !fundraiserAddress || !fundraisingAmount || !beneficiary) {
+    if (!name || !description || !fundraiserAddress || !fundraisingAmount || !beneficiary || !category) {
       res
         .status(400)
         .send({ error: 'Request should have name, description, fundraiserAddress, fundraisingAmount, beneficiary' });
@@ -31,6 +31,7 @@ export const writeNewFundraiser = async (req: Request, res: Response): Promise<v
       fundraiserAddress,
       fundraisingAmount,
       beneficiary,
+      category,
     });
 
     await newFundraiser.save();
