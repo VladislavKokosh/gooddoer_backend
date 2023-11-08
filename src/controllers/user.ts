@@ -2,11 +2,9 @@ import { type Request, type Response } from 'express';
 import { type Document } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 
-import { type IUser } from '../models/User/user.types';
+import { User, type IUser } from '../models/User';
 import { recoverPersonalSignature } from 'eth-sig-util';
 import { createToken, getUserIdByToken } from '../passport/service';
-
-import { User } from '../models/User/user';
 
 export const getUserById = async (req: Request, res: Response): Promise<void> => {
   const decodedToken = getUserIdByToken(req.headers);

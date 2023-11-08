@@ -1,8 +1,7 @@
 import { type Document } from 'mongoose';
 import { type Request, type Response } from 'express';
 
-import { Fundraiser } from '../models/Fundraiser/fundraiser';
-import { type IFundraiser } from '../models/Fundraiser/fundraiser.types';
+import { Fundraiser, type IFundraiser } from '../models/Fundraiser';
 
 export const getFundraisers = async (_req: Request, res: Response): Promise<void> => {
   try {

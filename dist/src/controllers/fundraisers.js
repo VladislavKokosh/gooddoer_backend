@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.writeNewFundraiser = exports.getFundraisers = void 0;
-const fundraiser_1 = require("../models/Fundraiser/fundraiser");
+const Fundraiser_1 = require("../models/Fundraiser");
 const getFundraisers = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const fundraisers = yield fundraiser_1.Fundraiser.find();
+        const fundraisers = yield Fundraiser_1.Fundraiser.find();
         res.status(200).json(fundraisers);
     }
     catch (error) {
@@ -32,7 +32,7 @@ const writeNewFundraiser = (req, res) => __awaiter(void 0, void 0, void 0, funct
                 .send({ error: 'Request should have name, description, fundraiserAddress, fundraisingAmount, beneficiary' });
             return;
         }
-        const newFundraiser = new fundraiser_1.Fundraiser({
+        const newFundraiser = new Fundraiser_1.Fundraiser({
             name,
             description,
             fundraiserAddress,

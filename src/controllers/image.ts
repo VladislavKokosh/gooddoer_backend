@@ -1,8 +1,6 @@
-import fs from 'fs';
 import { type Request, type Response } from 'express';
 import { type Document } from 'mongoose';
-import { Image } from '../models/Image/image';
-import { type IImage } from '../models/Image/image.types';
+import { Image, type IImage } from '../models/Image';
 
 export const getImage = async (_req: Request, res: Response): Promise<void> => {
   try {

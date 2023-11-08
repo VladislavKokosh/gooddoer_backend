@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.passportStrategy = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 const passport_jwt_1 = require("passport-jwt");
-const user_1 = require("../models/User/user");
+const User_1 = require("../models/User");
 dotenv_1.default.config();
 const options = {
     jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -26,7 +26,7 @@ const passportStrategy = (passport) => __awaiter(void 0, void 0, void 0, functio
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     new passport_jwt_1.Strategy(options, (payload, done) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const user = yield user_1.User.findById(payload.userId).select('');
+            const user = yield User_1.User.findById(payload.userId).select('');
             if (user) {
                 done(null, user);
             }

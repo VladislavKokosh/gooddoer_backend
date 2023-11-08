@@ -11,9 +11,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.changeUsername = exports.authentication = exports.getNonceByAddress = exports.getUserById = void 0;
 const uuid_1 = require("uuid");
+const User_1 = require("../models/User");
 const eth_sig_util_1 = require("eth-sig-util");
 const service_1 = require("../passport/service");
-const user_1 = require("../models/User/user");
 const getUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const decodedToken = (0, service_1.getUserIdByToken)(req.headers);
     if (!decodedToken) {
@@ -21,7 +21,7 @@ const getUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         return;
     }
     const userId = decodedToken && typeof decodedToken !== 'string' && decodedToken.userId;
-    const user = yield user_1.User.findById(userId);
+    const user = yield User_1.User.findById(userId);
     if (user) {
         res.status(200).json({ user });
     }
@@ -35,12 +35,12 @@ const getNonceByAddress = (req, res) => __awaiter(void 0, void 0, void 0, functi
     if (!publicAddress) {
         res.status(400).json({ message: 'Request should have publicAddress in params' });
     }
-    const user = yield user_1.User.findOne({ publicAddress });
+    const user = yield User_1.User.findOne({ publicAddress });
     if (user) {
         res.status(200).json(user.nonce);
     }
     else {
-        const newUser = new user_1.User({
+        const newUser = new User_1.User({
             publicAddress,
         });
         yield newUser
@@ -61,7 +61,7 @@ const authentication = (req, res) => __awaiter(void 0, void 0, void 0, function*
             res.status(400).send({ error: 'Request should have signature and publicAddress' });
             return;
         }
-        const user = yield user_1.User.findOne({ publicAddress });
+        const user = yield User_1.User.findOne({ publicAddress });
         if (user) {
             const message = `I am signing my one-time nonce: ${user.nonce}`;
             const messageBufferHex = `0x${Buffer.from(message, 'utf8').toString('hex')}`;
@@ -99,7 +99,7 @@ const changeUsername = (req, res) => __awaiter(void 0, void 0, void 0, function*
             return;
         }
         const userId = decodedToken && typeof decodedToken !== 'string' && decodedToken.userId;
-        const user = yield user_1.User.findById(userId);
+        const user = yield User_1.User.findById(userId);
         if (!user) {
             res.status(500).json({ error: 'User is not found.' });
             return;

@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.uploadImage = exports.getImage = void 0;
-const image_1 = require("../models/Image/image");
+const Image_1 = require("../models/Image");
 const getImage = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const image = yield image_1.Image.find();
+        const image = yield Image_1.Image.find();
         res.status(200).json(image);
     }
     catch (error) {
@@ -33,7 +33,7 @@ const uploadImage = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             data: reqFile.buffer,
             contentType: reqFile.mimetype,
         };
-        const newImage = new image_1.Image({
+        const newImage = new Image_1.Image({
             name: reqFile.originalname,
             image: finalImage,
         });
