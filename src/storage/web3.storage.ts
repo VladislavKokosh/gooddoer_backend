@@ -8,8 +8,8 @@ const getAccessToken = (): string => process.env.WEB3STORAGE_TOKEN;
 
 const makeStorageClient = (): Web3Storage => new Web3Storage({ token: getAccessToken() });
 
-const makeFileObjects = async (name: string, image: string): Promise<File[]> => {
-  const obj = { name, image };
+const makeFileObjects = async (name: string, file: string): Promise<File[]> => {
+  const obj = { name, file };
   const buffer = Buffer.from(JSON.stringify(obj));
 
   const files = [new File(['contents-of-file-1'], 'plain-utf8.txt'), new File([buffer], 'metadata.json')];

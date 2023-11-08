@@ -19,8 +19,8 @@ const file_1 = require("@web-std/file");
 dotenv_1.default.config();
 const getAccessToken = () => process.env.WEB3STORAGE_TOKEN;
 const makeStorageClient = () => new web3_storage_1.Web3Storage({ token: getAccessToken() });
-const makeFileObjects = (name, image) => __awaiter(void 0, void 0, void 0, function* () {
-    const obj = { name, image };
+const makeFileObjects = (name, file) => __awaiter(void 0, void 0, void 0, function* () {
+    const obj = { name, file };
     const buffer = Buffer.from(JSON.stringify(obj));
     const files = [new file_1.File(['contents-of-file-1'], 'plain-utf8.txt'), new file_1.File([buffer], 'metadata.json')];
     return files;

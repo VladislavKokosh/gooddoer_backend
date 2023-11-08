@@ -3,14 +3,14 @@ import mongoose from 'mongoose';
 import passport from 'passport';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
-import passportStrategy from './src/middleware/passport';
+import { passportStrategy } from './src/middleware';
 import routes from './src/routes/index';
 import { listenGooddoerFactory } from './src/listeners';
 
 dotenv.config();
 
-const PORT: string = process.env.PORT !== undefined ? process.env.PORT : '8000';
-const URL: string = process.env.MONGO_URI !== undefined ? process.env.MONGO_URI : '';
+const PORT: string = process.env.PORT && process.env.PORT;
+const URL: string = process.env.MONGO_URI && process.env.MONGO_URI;
 
 const app: Express = express();
 
@@ -23,6 +23,7 @@ app.use((req, res, next) => {
   );
   next();
 });
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());

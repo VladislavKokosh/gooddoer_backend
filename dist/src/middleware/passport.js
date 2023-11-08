@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.passportStrategy = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 const passport_jwt_1 = require("passport-jwt");
 const user_1 = require("../models/User/user");
@@ -20,7 +21,7 @@ const options = {
     jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: process.env.SECRET,
 };
-exports.default = (passport) => __awaiter(void 0, void 0, void 0, function* () {
+const passportStrategy = (passport) => __awaiter(void 0, void 0, void 0, function* () {
     passport.use(
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     new passport_jwt_1.Strategy(options, (payload, done) => __awaiter(void 0, void 0, void 0, function* () {
@@ -38,4 +39,5 @@ exports.default = (passport) => __awaiter(void 0, void 0, void 0, function* () {
         }
     })));
 });
+exports.passportStrategy = passportStrategy;
 //# sourceMappingURL=passport.js.map

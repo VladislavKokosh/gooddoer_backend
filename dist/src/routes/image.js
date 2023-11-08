@@ -33,16 +33,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const uploadController = __importStar(require("../controllers/files"));
+const imageController = __importStar(require("../controllers/image"));
 const middleware_1 = require("../middleware");
 const router = (0, express_1.Router)();
-router.post('/', middleware_1.upload.single('file'), ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield uploadController.web3StorageUpload(req, res);
-    }
-    catch (error) {
-        console.log(error);
-    }
+router.get('/', ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield imageController.getImage(req, res);
+})));
+router.post('/', middleware_1.uploadImage.single('image'), ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield imageController.uploadImage(req, res);
 })));
 exports.default = router;
-//# sourceMappingURL=files.js.map
+//# sourceMappingURL=image.js.map

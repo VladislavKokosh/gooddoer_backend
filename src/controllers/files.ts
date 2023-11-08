@@ -5,19 +5,19 @@ import { toBytes32 } from '../utils';
 export const web3StorageUpload = async (req: Request, res: Response): Promise<void> => {
   const reqFile = req.file;
 
-  console.log(`Uploading image: [${reqFile.originalname}] to ipfs.`);
+  console.log(`Uploading file: [${reqFile.originalname}] to ipfs.`);
 
   if (!reqFile) {
     res.status(401).send({ message: 'invalid input' });
   }
 
-  const imageName = `${toBytes32(new Date().getTime().toString() + '_' + reqFile.originalname)}`;
+  const fileName = `${toBytes32(new Date().getTime().toString() + '_' + reqFile.originalname)}`;
 
-  const file = await fileFromPath(reqFile, imageName);
+  const file = await fileFromPath(reqFile, fileName);
 
-  const imageCid = await storeFiles(file);
+  const fileCid = await storeFiles(file);
 
-  const files = await makeFileObjects(imageName, `https://${imageCid}.ipfs.w3s.link/${imageName}`);
+  const files = await makeFileObjects(fileName, `https://${fileCid}.ipfs.w3s.link/${fileName}`);
 
   const metaDataCid = await storeFiles(files);
 

@@ -11,7 +11,7 @@ const options = {
   secretOrKey: process.env.SECRET,
 };
 
-export default async (passport: PassportStatic): Promise<void> => {
+const passportStrategy = async (passport: PassportStatic): Promise<void> => {
   passport.use(
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     new JwtStrategy(options, async (payload, done) => {
@@ -29,3 +29,5 @@ export default async (passport: PassportStatic): Promise<void> => {
     })
   );
 };
+
+export { passportStrategy };

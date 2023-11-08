@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { type RequestHandler } from 'express-serve-static-core';
 import * as uploadController from '../controllers/files';
-import { upload } from '../middleware/upload';
+import { upload } from '../middleware';
 
 const router = Router();
 
