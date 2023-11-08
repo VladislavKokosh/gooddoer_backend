@@ -8,12 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.uploadImage = exports.getImage = void 0;
-const fs_1 = __importDefault(require("fs"));
 const image_1 = require("../models/Image/image");
 const getImage = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -33,10 +29,8 @@ const uploadImage = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         if (!reqFile) {
             res.status(401).send({ message: 'Invalid input' });
         }
-        const image = fs_1.default.readFileSync(reqFile.path);
-        const encodeImage = image.toString('base64');
         const finalImage = {
-            data: Buffer.from(encodeImage, 'base64'),
+            data: reqFile.buffer,
             contentType: reqFile.mimetype,
         };
         const newImage = new image_1.Image({

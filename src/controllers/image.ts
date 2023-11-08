@@ -23,10 +23,8 @@ export const uploadImage = async (req: Request, res: Response): Promise<void> =>
       res.status(401).send({ message: 'Invalid input' });
     }
 
-    const image = fs.readFileSync(reqFile.path);
-    const encodeImage = image.toString('base64');
     const finalImage = {
-      data: Buffer.from(encodeImage, 'base64'),
+      data: reqFile.buffer,
       contentType: reqFile.mimetype,
     };
 
