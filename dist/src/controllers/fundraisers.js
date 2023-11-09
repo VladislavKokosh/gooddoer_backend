@@ -30,7 +30,7 @@ exports.getFundraisers = getFundraisers;
 const writeNewFundraiser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, description, fundraiserAddress, fundraisingAmount, beneficiary, category, docs } = req.body;
-        const image = req.file;
+        const file = req.file;
         if (!name ||
             !description ||
             !fundraiserAddress ||
@@ -38,15 +38,15 @@ const writeNewFundraiser = (req, res) => __awaiter(void 0, void 0, void 0, funct
             !beneficiary ||
             !category ||
             !docs ||
-            !image) {
+            !file) {
             res.status(400).send({
                 error: 'Request should have name, description, fundraiserAddress, fundraisingAmount, beneficiary, docs, image',
             });
             return;
         }
         const finalImage = {
-            data: image.buffer,
-            contentType: image.mimetype,
+            data: file.buffer,
+            contentType: file.mimetype,
         };
         const newFundraiser = new Fundraiser_1.Fundraiser({
             name,
