@@ -11,10 +11,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.writeNewFundraiser = exports.getFundraisers = void 0;
 const Fundraiser_1 = require("../models/Fundraiser");
+const Image_1 = require("../models/Image");
 const getFundraisers = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const fundraisers = yield Fundraiser_1.Fundraiser.find();
-        res.status(200).json(fundraisers);
+        const updatedFundraisers = fundraisers.map((fundraiser) => {
+            return Object.assign(Object.assign({}, fundraiser), { image: Image_1.Image.findById(fundraiser.image) });
+        });
+        res.status(200).json(updatedFundraisers);
     }
     catch (error) {
         res.status(401).json({
@@ -25,7 +29,8 @@ const getFundraisers = (_req, res) => __awaiter(void 0, void 0, void 0, function
 exports.getFundraisers = getFundraisers;
 const writeNewFundraiser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { name, description, fundraiserAddress, fundraisingAmount, beneficiary, category, docs, image } = req.body;
+        const { name, description, fundraiserAddress, fundraisingAmount, beneficiary, category, docs } = req.body;
+        const image = req.file;
         if (!name ||
             !description ||
             !fundraiserAddress ||
@@ -39,6 +44,10 @@ const writeNewFundraiser = (req, res) => __awaiter(void 0, void 0, void 0, funct
             });
             return;
         }
+        const finalImage = {
+            data: image.buffer,
+            contentType: image.mimetype,
+        };
         const newFundraiser = new Fundraiser_1.Fundraiser({
             name,
             description,
@@ -47,7 +56,7 @@ const writeNewFundraiser = (req, res) => __awaiter(void 0, void 0, void 0, funct
             beneficiary,
             category,
             docs,
-            image,
+            finalImage,
         });
         yield newFundraiser.save();
         res.status(200);

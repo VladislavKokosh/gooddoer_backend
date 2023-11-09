@@ -34,11 +34,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const fundraiserController = __importStar(require("../controllers/fundraisers"));
+const middleware_1 = require("../middleware");
 const router = (0, express_1.Router)();
 router.get('/', ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield fundraiserController.getFundraisers(req, res);
 })));
-router.post('/', ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post('/', middleware_1.upload.single('file'), ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield fundraiserController.writeNewFundraiser(req, res);
 })));
 exports.default = router;

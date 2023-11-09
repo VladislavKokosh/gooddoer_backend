@@ -2,11 +2,15 @@ import { type Document } from 'mongoose';
 import { type Request, type Response } from 'express';
 
 import { Fundraiser, type IFundraiser } from '../models/Fundraiser';
+import { Image } from '../models/Image';
 
 export const getFundraisers = async (_req: Request, res: Response): Promise<void> => {
   try {
     const fundraisers = await Fundraiser.find();
-    res.status(200).json(fundraisers);
+    const updatedFundraisers = fundraisers.map((fundraiser) => {
+      return { ...fundraiser, image: Image.findById(fundraiser.image) };
+    });
+    res.status(200).json(updatedFundraisers);
   } catch (error) {
     res.status(401).json({
       message: error.message,
@@ -16,8 +20,8 @@ export const getFundraisers = async (_req: Request, res: Response): Promise<void
 
 export const writeNewFundraiser = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { name, description, fundraiserAddress, fundraisingAmount, beneficiary, category, docs, image } = req.body;
-
+    const { name, description, fundraiserAddress, fundraisingAmount, beneficiary, category, docs } = req.body;
+    const image = req.file;
     if (
       !name ||
       !description ||
@@ -33,6 +37,12 @@ export const writeNewFundraiser = async (req: Request, res: Response): Promise<v
       });
       return;
     }
+
+    const finalImage = {
+      data: image.buffer,
+      contentType: image.mimetype,
+    };
+
     const newFundraiser: IFundraiser & Document = new Fundraiser({
       name,
       description,
@@ -41,7 +51,7 @@ export const writeNewFundraiser = async (req: Request, res: Response): Promise<v
       beneficiary,
       category,
       docs,
-      image,
+      finalImage,
     });
 
     await newFundraiser.save();

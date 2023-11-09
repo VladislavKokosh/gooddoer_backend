@@ -46,8 +46,9 @@ const userSchema = new Schema<IFundraiser>({
     require: [true, 'A docs is required'],
   },
   image: {
-    type: String,
-    required: [true, 'An image is required'],
+    data: Buffer,
+    contentType: String,
+    require: [true, 'A image is required'],
   },
 });
 
