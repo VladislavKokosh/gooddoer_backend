@@ -46,6 +46,10 @@ const userSchema = new mongoose_1.Schema({
         type: String,
         require: [true, 'A docs is required'],
     },
+    image: {
+        type: String,
+        required: [true, 'An image is required'],
+    },
 });
 exports.Fundraiser = (0, mongoose_1.model)('Fundraiser', userSchema);
 //# sourceMappingURL=fundraiser.js.map

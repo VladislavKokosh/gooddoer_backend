@@ -2,9 +2,16 @@ import { type Request, type Response } from 'express';
 import { type Document } from 'mongoose';
 import { Image, type IImage } from '../models/Image';
 
-export const getImage = async (_req: Request, res: Response): Promise<void> => {
+export const getImage = async (req: Request, res: Response): Promise<void> => {
   try {
-    const image = await Image.find();
+    const { id } = req.query;
+
+    if (!id) {
+      res.status(400).json({ message: 'Request should have publicAddress in params' });
+    }
+
+    const image = await Image.findById(id);
+
     res.status(200).json(image);
   } catch (error) {
     res.status(401).json({

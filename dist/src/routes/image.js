@@ -39,7 +39,7 @@ const router = (0, express_1.Router)();
 router.get('/', ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield imageController.getImage(req, res);
 })));
-router.post('/', middleware_1.upload.single('image'), ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post('/', middleware_1.upload.single('file'), ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield imageController.uploadImage(req, res);
 })));
 exports.default = router;

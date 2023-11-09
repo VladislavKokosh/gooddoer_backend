@@ -11,9 +11,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.uploadImage = exports.getImage = void 0;
 const Image_1 = require("../models/Image");
-const getImage = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getImage = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const image = yield Image_1.Image.find();
+        const { id } = req.query;
+        if (!id) {
+            res.status(400).json({ message: 'Request should have publicAddress in params' });
+        }
+        const image = yield Image_1.Image.findById(id);
         res.status(200).json(image);
     }
     catch (error) {

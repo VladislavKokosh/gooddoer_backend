@@ -45,6 +45,10 @@ const userSchema = new Schema<IFundraiser>({
     type: String,
     require: [true, 'A docs is required'],
   },
+  image: {
+    type: String,
+    required: [true, 'An image is required'],
+  },
 });
 
 export const Fundraiser = model<IFundraiser & Document>('Fundraiser', userSchema);

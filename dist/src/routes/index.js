@@ -10,7 +10,7 @@ const fundraisers_1 = __importDefault(require("./fundraisers"));
 const image_1 = __importDefault(require("./image"));
 const router = (0, express_1.Router)();
 router.use('/user', user_1.default);
-router.use('/upload', files_1.default);
+router.use('/file', files_1.default);
 router.use('/fundraisers', fundraisers_1.default);
 router.use('/image', image_1.default);
 exports.default = router;

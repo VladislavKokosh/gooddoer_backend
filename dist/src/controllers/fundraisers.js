@@ -25,11 +25,18 @@ const getFundraisers = (_req, res) => __awaiter(void 0, void 0, void 0, function
 exports.getFundraisers = getFundraisers;
 const writeNewFundraiser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { name, description, fundraiserAddress, fundraisingAmount, beneficiary, category, docs } = req.body;
-        if (!name || !description || !fundraiserAddress || !fundraisingAmount || !beneficiary || !category || !docs) {
-            res
-                .status(400)
-                .send({ error: 'Request should have name, description, fundraiserAddress, fundraisingAmount, beneficiary' });
+        const { name, description, fundraiserAddress, fundraisingAmount, beneficiary, category, docs, image } = req.body;
+        if (!name ||
+            !description ||
+            !fundraiserAddress ||
+            !fundraisingAmount ||
+            !beneficiary ||
+            !category ||
+            !docs ||
+            !image) {
+            res.status(400).send({
+                error: 'Request should have name, description, fundraiserAddress, fundraisingAmount, beneficiary, docs, image',
+            });
             return;
         }
         const newFundraiser = new Fundraiser_1.Fundraiser({
@@ -40,6 +47,7 @@ const writeNewFundraiser = (req, res) => __awaiter(void 0, void 0, void 0, funct
             beneficiary,
             category,
             docs,
+            image,
         });
         yield newFundraiser.save();
         res.status(200);

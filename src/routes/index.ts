@@ -7,7 +7,7 @@ import imageRouter from './image';
 const router = Router();
 
 router.use('/user', userRouter);
-router.use('/upload', uploadRouter);
+router.use('/file', uploadRouter);
 router.use('/fundraisers', fundraiserRouter);
 router.use('/image', imageRouter);
 

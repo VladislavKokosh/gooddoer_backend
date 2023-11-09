@@ -8,6 +8,7 @@ interface IFundraiser extends Document {
   beneficiary: string;
   category: string;
   docs: string;
+  image: string;
 }
 
 export type { IFundraiser };
