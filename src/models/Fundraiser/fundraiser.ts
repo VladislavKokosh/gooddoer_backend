@@ -25,11 +25,11 @@ const userSchema = new Schema<IFundraiser>({
   },
   fundraisingAmount: {
     type: String,
-    require: [true, 'A fundraisingAmount is required'],
+    required: [true, 'A fundraisingAmount is required'],
   },
   beneficiary: {
     type: String,
-    require: [true, 'A beneficiary is required'],
+    required: [true, 'A beneficiary is required'],
     validate: {
       validator: (address: string) => {
         return isValidEthAddress(address);
@@ -39,11 +39,11 @@ const userSchema = new Schema<IFundraiser>({
   },
   category: {
     type: String,
-    require: [true, 'A category is required'],
+    required: [true, 'A category is required'],
   },
   docs: {
     type: String,
-    require: [true, 'A docs is required'],
+    required: [true, 'A docs is required'],
   },
   image: {
     data: {
@@ -54,7 +54,7 @@ const userSchema = new Schema<IFundraiser>({
       type: String,
       required: [true, 'Image contentType is required'],
     },
-    require: [true, 'An image is required'],
+    required: [true, 'An image is required'],
   },
 });
 

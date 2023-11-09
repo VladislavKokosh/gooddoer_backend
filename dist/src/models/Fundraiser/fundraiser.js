@@ -26,11 +26,11 @@ const userSchema = new mongoose_1.Schema({
     },
     fundraisingAmount: {
         type: String,
-        require: [true, 'A fundraisingAmount is required'],
+        required: [true, 'A fundraisingAmount is required'],
     },
     beneficiary: {
         type: String,
-        require: [true, 'A beneficiary is required'],
+        required: [true, 'A beneficiary is required'],
         validate: {
             validator: (address) => {
                 return (0, utils_1.isValidEthAddress)(address);
@@ -40,11 +40,11 @@ const userSchema = new mongoose_1.Schema({
     },
     category: {
         type: String,
-        require: [true, 'A category is required'],
+        required: [true, 'A category is required'],
     },
     docs: {
         type: String,
-        require: [true, 'A docs is required'],
+        required: [true, 'A docs is required'],
     },
     image: {
         data: {
@@ -55,7 +55,7 @@ const userSchema = new mongoose_1.Schema({
             type: String,
             required: [true, 'Image contentType is required'],
         },
-        require: [true, 'An image is required'],
+        required: [true, 'An image is required'],
     },
 });
 exports.Fundraiser = (0, mongoose_1.model)('Fundraiser', userSchema);
