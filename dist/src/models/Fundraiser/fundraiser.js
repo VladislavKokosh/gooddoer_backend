@@ -47,9 +47,15 @@ const userSchema = new mongoose_1.Schema({
         require: [true, 'A docs is required'],
     },
     image: {
-        data: Buffer,
-        contentType: String,
-        require: [true, 'A image is required'],
+        data: {
+            type: Buffer,
+            required: [true, 'Image data is required'],
+        },
+        contentType: {
+            type: String,
+            required: [true, 'Image contentType is required'],
+        },
+        require: [true, 'An image is required'],
     },
 });
 exports.Fundraiser = (0, mongoose_1.model)('Fundraiser', userSchema);
