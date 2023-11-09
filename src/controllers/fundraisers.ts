@@ -2,15 +2,11 @@ import { type Document } from 'mongoose';
 import { type Request, type Response } from 'express';
 
 import { Fundraiser, type IFundraiser } from '../models/Fundraiser';
-import { Image } from '../models/Image';
 
 export const getFundraisers = async (_req: Request, res: Response): Promise<void> => {
   try {
     const fundraisers = await Fundraiser.find();
-    const updatedFundraisers = fundraisers.map((fundraiser) => {
-      return { ...fundraiser, image: Image.findById(fundraiser.image) };
-    });
-    res.status(200).json(updatedFundraisers);
+    res.status(200).json(fundraisers);
   } catch (error) {
     res.status(401).json({
       message: error.message,

@@ -11,14 +11,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.writeNewFundraiser = exports.getFundraisers = void 0;
 const Fundraiser_1 = require("../models/Fundraiser");
-const Image_1 = require("../models/Image");
 const getFundraisers = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const fundraisers = yield Fundraiser_1.Fundraiser.find();
-        const updatedFundraisers = fundraisers.map((fundraiser) => {
-            return Object.assign(Object.assign({}, fundraiser), { image: Image_1.Image.findById(fundraiser.image) });
-        });
-        res.status(200).json(updatedFundraisers);
+        res.status(200).json(fundraisers);
     }
     catch (error) {
         res.status(401).json({
