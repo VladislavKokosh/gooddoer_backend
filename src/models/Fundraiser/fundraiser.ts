@@ -54,7 +54,6 @@ const userSchema = new Schema<IFundraiser>({
       type: String,
       required: [true, 'Image contentType is required'],
     },
-    required: [true, 'An image is required'],
   },
 });
 

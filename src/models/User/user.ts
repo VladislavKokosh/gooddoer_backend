@@ -12,7 +12,7 @@ const userSchema = new Schema<IUser>({
   },
   publicAddress: {
     type: String,
-    require: [true, 'A publicAddress is required'],
+    required: [true, 'A publicAddress is required'],
     unique: true,
     validate: {
       validator: (address: string) => {
@@ -23,7 +23,7 @@ const userSchema = new Schema<IUser>({
   },
   username: {
     type: String,
-    require: [true, 'A username is required'],
+    required: [true, 'A username is required'],
     unique: true,
     validate: {
       validator: (username: string) => {

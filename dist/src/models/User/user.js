@@ -13,7 +13,7 @@ const userSchema = new mongoose_1.Schema({
     },
     publicAddress: {
         type: String,
-        require: [true, 'A publicAddress is required'],
+        required: [true, 'A publicAddress is required'],
         unique: true,
         validate: {
             validator: (address) => {
@@ -24,7 +24,7 @@ const userSchema = new mongoose_1.Schema({
     },
     username: {
         type: String,
-        require: [true, 'A username is required'],
+        required: [true, 'A username is required'],
         unique: true,
         validate: {
             validator: (username) => {
