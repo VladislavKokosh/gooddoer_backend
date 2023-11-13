@@ -49,11 +49,9 @@ const userSchema = new mongoose_1.Schema({
     image: {
         data: {
             type: Buffer,
-            required: [true, 'Image data is required'],
         },
         contentType: {
             type: String,
-            required: [true, 'Image contentType is required'],
         },
     },
 });

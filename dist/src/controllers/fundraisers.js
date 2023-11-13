@@ -25,8 +25,10 @@ const getFundraisers = (_req, res) => __awaiter(void 0, void 0, void 0, function
 exports.getFundraisers = getFundraisers;
 const writeNewFundraiser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        console.log(req.file, req.body);
         const { name, description, fundraiserAddress, fundraisingAmount, beneficiary, category, docs } = req.body;
         const file = req.file;
+        console.log(name, description, fundraiserAddress, fundraisingAmount, beneficiary, category, docs, file);
         if (!name ||
             !description ||
             !fundraiserAddress ||
@@ -55,7 +57,7 @@ const writeNewFundraiser = (req, res) => __awaiter(void 0, void 0, void 0, funct
             finalImage,
         });
         yield newFundraiser.save();
-        res.status(200);
+        res.send().status(200);
     }
     catch (error) {
         console.log(error);

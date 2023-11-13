@@ -1,6 +1,5 @@
 import { type Document } from 'mongoose';
 import { type Request, type Response } from 'express';
-
 import { Fundraiser, type IFundraiser } from '../models/Fundraiser';
 
 export const getFundraisers = async (_req: Request, res: Response): Promise<void> => {
@@ -16,8 +15,12 @@ export const getFundraisers = async (_req: Request, res: Response): Promise<void
 
 export const writeNewFundraiser = async (req: Request, res: Response): Promise<void> => {
   try {
+    console.log(req.file, req.body);
     const { name, description, fundraiserAddress, fundraisingAmount, beneficiary, category, docs } = req.body;
     const file = req.file;
+
+    console.log(name, description, fundraiserAddress, fundraisingAmount, beneficiary, category, docs, file);
+
     if (
       !name ||
       !description ||
@@ -51,7 +54,7 @@ export const writeNewFundraiser = async (req: Request, res: Response): Promise<v
     });
 
     await newFundraiser.save();
-    res.status(200);
+    res.send().status(200);
   } catch (error: any) {
     console.log(error);
   }
