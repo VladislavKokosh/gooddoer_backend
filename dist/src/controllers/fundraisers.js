@@ -54,7 +54,7 @@ const writeNewFundraiser = (req, res) => __awaiter(void 0, void 0, void 0, funct
             beneficiary,
             category,
             docs,
-            finalImage,
+            image: finalImage,
         });
         yield newFundraiser.save();
         res.send().status(200);

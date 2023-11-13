@@ -50,7 +50,7 @@ export const writeNewFundraiser = async (req: Request, res: Response): Promise<v
       beneficiary,
       category,
       docs,
-      finalImage,
+      image: finalImage,
     });
 
     await newFundraiser.save();
