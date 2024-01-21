@@ -23,7 +23,6 @@ const userSchema = new Schema<IUser>({
   },
   username: {
     type: String,
-    required: [true, 'A username is required'],
     unique: true,
     validate: {
       validator: (username: string) => {

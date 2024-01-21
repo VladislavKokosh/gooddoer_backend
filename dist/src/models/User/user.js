@@ -24,7 +24,6 @@ const userSchema = new mongoose_1.Schema({
     },
     username: {
         type: String,
-        required: [true, 'A username is required'],
         unique: true,
         validate: {
             validator: (username) => {

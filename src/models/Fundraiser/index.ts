@@ -1,2 +1,2 @@
-export * from "./fundraiser";
-export * from "./fundraiser.types";
+export * from './fundraiser';
+export * from './fundraiser.types';
