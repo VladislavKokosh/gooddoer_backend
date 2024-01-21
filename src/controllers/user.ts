@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { User, type IUser } from '../models/User';
 import { recoverPersonalSignature } from 'eth-sig-util';
 import { createToken, getUserIdByToken } from '../passport/service';
+import { ethers } from 'ethers';
 
 export const getUserById = async (req: Request, res: Response): Promise<void> => {
   const decodedToken = getUserIdByToken(req.headers);
@@ -31,8 +32,8 @@ export const getNonceByAddress = async (req: Request, res: Response): Promise<vo
   if (!publicAddress) {
     res.status(400).json({ message: 'Request should have publicAddress in params' });
   }
-
-  const user = await User.findOne({ publicAddress });
+  const checkSumAddress = ethers.getAddress(publicAddress);
+  const user = await User.findOne({ publicAddress: checkSumAddress });
 
   if (user) {
     res.status(200).json(user.nonce);
@@ -61,7 +62,8 @@ export const authentication = async (req: Request, res: Response): Promise<void>
       return;
     }
 
-    const user = await User.findOne({ publicAddress });
+    const checkSumAddress = ethers.getAddress(publicAddress);
+    const user = await User.findOne({ publicAddress: checkSumAddress });
 
     if (user) {
       const message = `I am signing my one-time nonce: ${user.nonce}`;

@@ -14,6 +14,7 @@ const uuid_1 = require("uuid");
 const User_1 = require("../models/User");
 const eth_sig_util_1 = require("eth-sig-util");
 const service_1 = require("../passport/service");
+const ethers_1 = require("ethers");
 const getUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const decodedToken = (0, service_1.getUserIdByToken)(req.headers);
     if (!decodedToken) {
@@ -35,7 +36,8 @@ const getNonceByAddress = (req, res) => __awaiter(void 0, void 0, void 0, functi
     if (!publicAddress) {
         res.status(400).json({ message: 'Request should have publicAddress in params' });
     }
-    const user = yield User_1.User.findOne({ publicAddress });
+    const checkSumAddress = ethers_1.ethers.getAddress(publicAddress);
+    const user = yield User_1.User.findOne({ publicAddress: checkSumAddress });
     if (user) {
         res.status(200).json(user.nonce);
     }
@@ -61,7 +63,8 @@ const authentication = (req, res) => __awaiter(void 0, void 0, void 0, function*
             res.status(400).send({ error: 'Request should have signature and publicAddress' });
             return;
         }
-        const user = yield User_1.User.findOne({ publicAddress });
+        const checkSumAddress = ethers_1.ethers.getAddress(publicAddress);
+        const user = yield User_1.User.findOne({ publicAddress: checkSumAddress });
         if (user) {
             const message = `I am signing my one-time nonce: ${user.nonce}`;
             const messageBufferHex = `0x${Buffer.from(message, 'utf8').toString('hex')}`;
